@@ -1,10 +1,12 @@
 import axios from "axios";
 import { format } from "date-fns";
 import React, { useEffect, useState } from "react";
+import ShowModal from "../ShowModal/ShowModal";
 import Info from "./Info";
 
 const AvailableAppointment = ({ date }) => {
   const [services, setServices] = useState([]);
+  const [treatment, setTreatment] = useState();
   useEffect(() => {
     const loadData = async () => {
       const { data } = await axios("services.json");
@@ -19,9 +21,14 @@ const AvailableAppointment = ({ date }) => {
       </h3>
       <div className="grid md:grid-cols-3 gap-5 justify-center items-center max-w-[1280px] mx-auto">
         {services?.map((service) => (
-          <Info key={service._id} service={service}></Info>
+          <Info
+            key={service._id}
+            service={service}
+            setTreatment={setTreatment}
+          ></Info>
         ))}
       </div>
+      {treatment && <ShowModal treatment={treatment}></ShowModal>}
     </div>
   );
 };
