@@ -1,5 +1,5 @@
 import React from "react";
-import treatment from "../../../../assets/images/doctor.png";
+import treatment from "../../../../assets/images/doctor-small.png";
 import PrimaryButton from "../../../Utilities/PrimaryButton/PrimaryButton";
 import appointmentBg from "../../../../assets/images/appointment.png";
 

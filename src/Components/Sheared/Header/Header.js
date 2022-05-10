@@ -10,7 +10,7 @@ const navMenu = (
       <Link to="/">About</Link>
     </li>
     <li>
-      <Link to="/">Appointment</Link>
+      <Link to="/appointment">Appointment</Link>
     </li>
     <li>
       <Link to="/">Reviews</Link>

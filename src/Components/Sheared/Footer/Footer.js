@@ -10,10 +10,10 @@ const Footer = () => {
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
       }}
-      className="p-10 bg-neutral text-neutral-content"
+      className="p-10 bg-neutral text-neutral-content max-w-[1280px] mx-auto"
     >
-      <div className="footer">
-        <div>
+      <div className="grid md:grid-cols-3 grid-cols-1 gap-5 ">
+        <div className="flex flex-col ">
           <span className="footer-title">Services</span>
           <Link to="/" className="link link-hover">
             Branding
@@ -28,7 +28,7 @@ const Footer = () => {
             Advertisement
           </Link>
         </div>
-        <div>
+        <div className="flex flex-col ">
           <span className="footer-title">Company</span>
           <Link to="/" className="link link-hover">
             About us
@@ -43,16 +43,10 @@ const Footer = () => {
             Press kit
           </Link>
         </div>
-        <div>
-          <span className="footer-title">Legal</span>
+        <div className="flex flex-col ">
+          <span className="footer-title">OUR ADDRESS</span>
           <Link to="/" className="link link-hover">
-            Terms of use
-          </Link>
-          <Link to="/" className="link link-hover">
-            Privacy policy
-          </Link>
-          <Link to="/" className="link link-hover">
-            Cookie policy
+            Terms of useNew York - 101010 Hudson
           </Link>
         </div>
       </div>
