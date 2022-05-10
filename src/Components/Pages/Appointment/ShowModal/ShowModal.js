@@ -1,7 +1,20 @@
+import { format } from "date-fns";
 import React from "react";
 
-const ShowModal = ({ treatment }) => {
-  const { name, slots } = treatment || {};
+const ShowModal = ({ treatment, date, setTreatment }) => {
+  const { name, slots, _id } = treatment || {};
+
+  const handelForm = (event) => {
+    event.preventDefault();
+    const date = event.target.date.value;
+    const slot = event.target.slot.value;
+    const userName = event.target.name.value;
+    const email = event.target.email.value;
+    const address = event.target.address.value;
+
+    console.log(date, userName, email, slot, address, _id, name);
+    setTreatment(null);
+  };
   return (
     <>
       <input type="checkbox" id="treatment-modal" className="modal-toggle" />
@@ -14,18 +27,47 @@ const ShowModal = ({ treatment }) => {
             ✕
           </label>
           <h3 className="font-bold text-lg text-secondary">{name}</h3>
-          <p className="py-4">
-            You've been selected for a chance to get one year of subscription to
-            use Wikipedia for free!
-          </p>
-          <div className="">
-            <label
+          <form action="" onSubmit={handelForm} className="flex flex-col gap-5">
+            <input
+              type="text"
+              name="date"
+              defaultValue={format(date, "PP")}
+              disabled
+              class="input input-bordered w-full "
+            />
+            <select name="slot" class="select select-bordered w-full">
+              {slots.map((slotTime) => (
+                <option value="slotTime" key={slotTime.index}>
+                  {slotTime}
+                </option>
+              ))}
+            </select>
+            <input
+              type="text"
+              placeholder="Name"
+              name="name"
+              class="input input-bordered w-full "
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="email"
+              class="input input-bordered w-full "
+            />
+            <input
+              type="text"
+              name="address"
+              placeholder="Address"
+              class="input input-bordered w-full "
+            />
+            <button
+              type="submit"
               for="treatment-modal"
               className="btn btn-primary text-neutral"
             >
               SUBMIT
-            </label>
-          </div>
+            </button>
+          </form>
         </div>
       </div>
     </>
