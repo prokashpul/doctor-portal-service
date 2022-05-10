@@ -15,7 +15,7 @@ const person = [
   },
   {
     name: "Lena Uila",
-    deg: "Greater Melbourne (Inner), VIC",
+    deg: "Greater Melbourne",
     img: `${per2}`,
     command:
       "Very good service and facilities. I always look forward to the visit as they give options and good advise. Using the right health provider helps save a lot of money especially if you need dental work.",
@@ -23,7 +23,7 @@ const person = [
   },
   {
     name: "Max Herry",
-    deg: "Greater Melbourne (Inner), VIC",
+    deg: "Greater Melbourne",
     img: `${per3}`,
     command:
       "Very good service and facilities. I always look forward to the visit as they give options and good advise. Using the right health provider helps save a lot of money especially if you need dental work.",
