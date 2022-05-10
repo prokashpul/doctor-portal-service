@@ -7,3 +7,4 @@
 > - npm install -D tailwindcss
 > - npm i daisyui
 > - npm install react-day-picker date-fns
+> - npm install axios
