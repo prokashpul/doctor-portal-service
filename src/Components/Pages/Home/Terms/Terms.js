@@ -12,7 +12,7 @@ const Terms = () => {
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
       }}
-      className="hero p-10"
+      className="hero p-10 md:mb-[100px]"
     >
       <div className="hero-content flex-col md:flex-row gap-10 ">
         <figure className="">
@@ -27,16 +27,17 @@ const Terms = () => {
             Exceptional Dental Care, on Your Terms
           </h1>
           <p className="py-6">
-            At Exceptional Dental, your smile is our top priority. We are
-            dedicated to providing you with the personalized and gentle care
-            that you deserve. When you visit our office, you can expect all that
-            modern dentistry has to offer, including a comprehensive list of
-            general, restorative and cosmetic dental services to meet the needs
-            of the whole family. Our goal is to assist each patient in achieving
-            and maintaining long-term dental health and a beautiful smile. We
-            are a dental practice devoted to restoring and enhancing the natural
-            beauty of your smile using conservative, state-of-the-art procedures
-            that result in beautiful, long lasting smiles!
+            As your dental health professionals, we want you to be confident
+            knowing that we are a team of highly trained and skilled clinicians.
+            We pride ourselves in providing the care you need to keep your smile
+            healthy. To give you the best possible service and results, we are
+            committed to continual education and learning. We attend dental
+            lectures, meetings, and dental conventions to stay informed of new
+            techniques, the latest products, and the newest equipment that a
+            modern dental office can utilize to provide state-of-the-art dental
+            care. Also, being members of various professional dental
+            associations helps us to stay abreast of the changes and
+            recommendations for our profession.
           </p>
           <PrimaryButton>GET STARTED</PrimaryButton>
         </div>

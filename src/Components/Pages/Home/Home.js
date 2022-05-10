@@ -1,4 +1,5 @@
 import React from "react";
+import Appointment from "./Appointment/Appointment";
 import Banner from "./Banner/Banner";
 import InfoCard from "./InfoCard/InfCard";
 import Services from "./Services/Services";
@@ -11,6 +12,7 @@ const Home = () => {
       <InfoCard></InfoCard>
       <Services></Services>
       <Terms></Terms>
+      <Appointment></Appointment>
     </div>
   );
 };
