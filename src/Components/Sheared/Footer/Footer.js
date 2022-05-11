@@ -10,7 +10,7 @@ const Footer = () => {
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
       }}
-      className="p-10 bg-neutral text-neutral-content max-w-[1280px] mx-auto"
+      className="p-10 bg-neutral text-neutral-content max-w-[1280px] mx-auto overflow-hidden"
     >
       <div className="grid md:grid-cols-3 grid-cols-1 gap-5 ">
         <div className="flex flex-col ">

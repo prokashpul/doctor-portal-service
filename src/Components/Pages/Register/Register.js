@@ -1,29 +1,28 @@
-import React, { useState } from "react";
+import React from "react";
 import {
-  useSignInWithEmailAndPassword,
+  useCreateUserWithEmailAndPassword,
   useSignInWithGoogle,
+  useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../../Firebase.init";
 import Spinner from "../../Sheared/Spinner/Spinner";
 
-const Login = () => {
+const Register = () => {
   const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
-
-  const [signInWithEmailAndPassword, eUser, eLoading, eError] =
-    useSignInWithEmailAndPassword(auth);
-  const navigate = useNavigate();
+  const [createUserWithEmailAndPassword, eUser, eLoading, eError] =
+    useCreateUserWithEmailAndPassword(auth);
+  const [updateProfile, updating, updateError] = useUpdateProfile(auth);
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
-    signInWithEmailAndPassword(data.email, data.password);
-  };
-  if (loading || eLoading) {
+
+  const navigate = useNavigate();
+  if (loading || updating || eLoading) {
     return <Spinner></Spinner>;
   }
   let logInError;
@@ -31,20 +30,42 @@ const Login = () => {
     logInError = error?.message;
   } else if (eError) {
     logInError = eError?.message;
+  } else if (updateError) {
+    logInError = updateError?.message;
   }
+  const onSubmit = async (data) => {
+    await createUserWithEmailAndPassword(data.email, data.password);
+    await updateProfile({ displayName: data.name });
+  };
+
   if (user || eUser) {
     console.log(user || eUser);
     navigate("/");
   }
-
   return (
-    <div className="flex justify-center items-center w-[100%] min-h-[87vh] my-16">
+    <div className="flex justify-center items-center w-[100%] min-h-[87vh] my-20">
       <div className="card w-96 bg-base-100 shadow-xl">
         <div className="card-body">
           <h2 className="font-bold text-2xl mb-5 text-center text-primary">
-            Log in
+            Sin Up
           </h2>
           <form onSubmit={handleSubmit(onSubmit)}>
+            <label className="label" htmlFor="name">
+              <span className="label-text">Name</span>
+            </label>
+
+            {errors.name?.type === "required" && (
+              <span className="text-red-500 mb-1">{errors.name?.message}</span>
+            )}
+            <input
+              type="text"
+              id="name"
+              placeholder="Full Name"
+              className="input input-bordered w-full mb-3"
+              {...register("name", {
+                required: { value: true, message: "Name field is required" },
+              })}
+            />
             <label className="label" htmlFor="email">
               <span className="label-text">Email</span>
             </label>
@@ -68,6 +89,7 @@ const Login = () => {
                 },
               })}
             />
+
             <label className="label" htmlFor="password">
               <span className="label-text">Password</span>
             </label>
@@ -85,7 +107,7 @@ const Login = () => {
               type="password"
               id="password"
               placeholder="Password "
-              className="input input-bordered w-full my-5"
+              className="input input-bordered w-full mb-5"
               {...register("password", {
                 required: {
                   value: true,
@@ -98,19 +120,18 @@ const Login = () => {
                 },
               })}
             />
-            <p>Forgat password ?</p>
-
+            <p className="text-primary mb-1">Forgat password ?</p>
+            <p className="text-red-500 mb-1">{logInError}</p>
             <input
               className="btn btn-outline bg-accent text-neutral w-full my-3"
               type="submit"
-              value="Log in"
+              value=" Sin Up"
             />
           </form>
-          <p className="text-red-500 mb-1">{logInError}</p>
           <p>
-            New to Doctors Portal ?
-            <Link className="text-secondary ml-1" to="/register">
-              Create new account
+            Already have an account ?
+            <Link className="text-secondary ml-1" to="/login">
+              Log in
             </Link>
           </p>
           <div className="divider">OR</div>
@@ -127,4 +148,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
