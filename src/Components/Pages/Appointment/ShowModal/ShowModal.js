@@ -26,7 +26,9 @@ const ShowModal = ({ treatment, date, setTreatment }) => {
           >
             ✕
           </label>
-          <h3 className="font-bold text-lg text-secondary">{name}</h3>
+          <h3 className="font-bold text-lg text-secondary my-5">
+            Booking : {name}
+          </h3>
           <form action="" onSubmit={handelForm} className="flex flex-col gap-5">
             <input
               type="text"

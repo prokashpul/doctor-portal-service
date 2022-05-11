@@ -9,7 +9,7 @@ const AvailableAppointment = ({ date }) => {
   const [treatment, setTreatment] = useState();
   useEffect(() => {
     const loadData = async () => {
-      const { data } = await axios("services.json");
+      const { data } = await axios("http://localhost:5000/services");
       setServices(data);
     };
     loadData();

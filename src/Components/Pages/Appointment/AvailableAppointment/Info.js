@@ -1,7 +1,7 @@
 import React from "react";
 
 const Info = ({ service, setTreatment }) => {
-  const { name, slots, _id } = service || {};
+  const { name, slots } = service || {};
   return (
     <div className="card w-lg bg-neutral text-neutral-content shadow-lg">
       <div className="card-body items-center text-center">
