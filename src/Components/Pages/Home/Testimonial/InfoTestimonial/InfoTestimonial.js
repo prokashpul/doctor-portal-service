@@ -3,8 +3,8 @@ import React from "react";
 const InfoTestimonial = ({ testimonial }) => {
   const { img, deg, name, command } = testimonial || {};
   return (
-    <div class="card md:w-96 bg-base-100 shadow-xl">
-      <div class="card-body">
+    <div className="card md:w-96 bg-base-100 shadow-xl">
+      <div className="card-body">
         <p>{command}</p>
       </div>
       <div className="flex justify-start items-center pb-10 px-10">

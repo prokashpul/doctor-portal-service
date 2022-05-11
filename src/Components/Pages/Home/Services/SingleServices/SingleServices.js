@@ -8,8 +8,8 @@ const SingleServices = ({ img, title, des }) => {
       <figure>
         <img src={img} className="w-[102px] " alt="Movie" />
       </figure>
-      <div class="card-body">
-        <h2 class="card-title justify-center text-[20px]  font-bold">
+      <div className="card-body">
+        <h2 className="card-title justify-center text-[20px]  font-bold">
           {title}
         </h2>
         <p>{des}</p>

@@ -8,8 +8,8 @@ const SingleCard = ({ bgColor, img, title, des }) => {
       <figure>
         <img src={img} className="h-[86px] " alt="Movie" />
       </figure>
-      <div class="card-body">
-        <h2 class="card-title text-[20px] font-bold">{title}</h2>
+      <div className="card-body">
+        <h2 className="card-title text-[20px] font-bold">{title}</h2>
         <p>{des}</p>
       </div>
     </div>

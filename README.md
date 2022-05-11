@@ -10,3 +10,4 @@
 > - npm install axios
 > - npm install firebase
 > - npm install --save react-firebase-hooks
+> - npm install react-hook-form

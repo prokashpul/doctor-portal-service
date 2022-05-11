@@ -22,7 +22,7 @@ const ShowModal = ({ treatment, date, setTreatment }) => {
         <div className="modal-box text-center">
           <label
             for="treatment-modal"
-            class="btn btn-sm btn-circle absolute btn-accent right-2 top-2"
+            className="btn btn-sm btn-circle absolute btn-accent right-2 top-2"
           >
             ✕
           </label>
@@ -35,9 +35,9 @@ const ShowModal = ({ treatment, date, setTreatment }) => {
               name="date"
               defaultValue={format(date, "PP")}
               disabled
-              class="input input-bordered w-full "
+              className="input input-bordered w-full "
             />
-            <select name="slot" class="select select-bordered w-full">
+            <select name="slot" className="select select-bordered w-full">
               {slots.map((slotTime) => (
                 <option value="slotTime" key={slotTime.index}>
                   {slotTime}
@@ -48,19 +48,19 @@ const ShowModal = ({ treatment, date, setTreatment }) => {
               type="text"
               placeholder="Name"
               name="name"
-              class="input input-bordered w-full "
+              className="input input-bordered w-full "
             />
             <input
               type="email"
               name="email"
               placeholder="email"
-              class="input input-bordered w-full "
+              className="input input-bordered w-full "
             />
             <input
               type="text"
               name="address"
               placeholder="Address"
-              class="input input-bordered w-full "
+              className="input input-bordered w-full "
             />
             <button
               type="submit"
