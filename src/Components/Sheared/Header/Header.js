@@ -70,7 +70,7 @@ const Header = () => {
               <Link to="/login">Login</Link>
             </li>
           ) : (
-            <button onClick={logout} class="btn btn-ghost">
+            <button onClick={logout} className="btn btn-ghost">
               Log Out
             </button>
           )}

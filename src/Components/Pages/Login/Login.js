@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   useSignInWithEmailAndPassword,
   useSignInWithGoogle,
@@ -21,6 +21,11 @@ const Login = () => {
   } = useForm();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+  useEffect(() => {
+    if (user || eUser) {
+      navigate(from, { replace: true });
+    }
+  }, [navigate, user, eUser, from]);
 
   const onSubmit = (data) => {
     signInWithEmailAndPassword(data.email, data.password);
@@ -34,9 +39,6 @@ const Login = () => {
   } else if (eError) {
     logInError = eError?.message;
   }
-  if (user || eUser) {
-    navigate(from, { replace: true });
-  }
 
   return (
     <div className="flex justify-center items-center w-[100%] min-h-[87vh] my-16">
@@ -46,7 +48,7 @@ const Login = () => {
             Log in
           </h2>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <label className="label" htmlFor="email">
+            <label className="label" htmlhtmlFor="email">
               <span className="label-text">Email</span>
             </label>
             {errors.email?.type === "pattern" && (
@@ -69,7 +71,7 @@ const Login = () => {
                 },
               })}
             />
-            <label className="label" htmlFor="password">
+            <label className="label" htmlhtmlFor="password">
               <span className="label-text">Password</span>
             </label>
             {errors.password?.type === "pattern" && (

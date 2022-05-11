@@ -51,7 +51,7 @@ const Register = () => {
             Sin Up
           </h2>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <label className="label" htmlFor="name">
+            <label className="label" htmlhtmlFor="name">
               <span className="label-text">Name</span>
             </label>
 
@@ -67,7 +67,7 @@ const Register = () => {
                 required: { value: true, message: "Name field is required" },
               })}
             />
-            <label className="label" htmlFor="email">
+            <label className="label" htmlhtmlFor="email">
               <span className="label-text">Email</span>
             </label>
             {errors.email?.type === "pattern" && (
@@ -91,7 +91,7 @@ const Register = () => {
               })}
             />
 
-            <label className="label" htmlFor="password">
+            <label className="label" htmlhtmlFor="password">
               <span className="label-text">Password</span>
             </label>
             {errors.password?.type === "pattern" && (

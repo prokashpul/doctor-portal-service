@@ -15,7 +15,7 @@ const Info = ({ service, setTreatment }) => {
         </p>
         <div className="card-actions border border-primary rounded-lg justify-end">
           <label
-            for="treatment-modal"
+            htmlFor="treatment-modal"
             onClick={() => setTreatment(service)}
             disabled={slots?.length === 0}
             className="btn btn-primary text-neutral"
