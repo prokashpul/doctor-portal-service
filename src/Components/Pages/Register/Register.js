@@ -5,7 +5,7 @@ import {
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../Firebase.init";
 import Spinner from "../../Sheared/Spinner/Spinner";
 
@@ -20,7 +20,8 @@ const Register = () => {
     watch,
     formState: { errors },
   } = useForm();
-
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const navigate = useNavigate();
   if (loading || updating || eLoading) {
     return <Spinner></Spinner>;
@@ -40,7 +41,7 @@ const Register = () => {
 
   if (user || eUser) {
     console.log(user || eUser);
-    navigate("/");
+    navigate(from, { replace: true });
   }
   return (
     <div className="flex justify-center items-center w-[100%] min-h-[87vh] my-20">

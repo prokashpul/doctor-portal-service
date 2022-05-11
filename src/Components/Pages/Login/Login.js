@@ -4,13 +4,12 @@ import {
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../Firebase.init";
 import Spinner from "../../Sheared/Spinner/Spinner";
 
 const Login = () => {
   const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
-
   const [signInWithEmailAndPassword, eUser, eLoading, eError] =
     useSignInWithEmailAndPassword(auth);
   const navigate = useNavigate();
@@ -20,6 +19,9 @@ const Login = () => {
     watch,
     formState: { errors },
   } = useForm();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
   const onSubmit = (data) => {
     signInWithEmailAndPassword(data.email, data.password);
   };
@@ -33,8 +35,7 @@ const Login = () => {
     logInError = eError?.message;
   }
   if (user || eUser) {
-    console.log(user || eUser);
-    navigate("/");
+    navigate(from, { replace: true });
   }
 
   return (
