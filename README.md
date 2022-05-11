@@ -8,3 +8,5 @@
 > - npm i daisyui
 > - npm install react-day-picker date-fns
 > - npm install axios
+> - npm install firebase
+> - npm install --save react-firebase-hooks
