@@ -1,18 +1,31 @@
+import { async } from "@firebase/util";
+import axios from "axios";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { toast } from "react-toastify";
 import auth from "../../../../Firebase.init";
 
 const ShowModal = ({ treatment, date, setTreatment }) => {
   const { name, slots, _id } = treatment || {};
   const [user] = useAuthState(auth);
-  const handelForm = (event) => {
+  const handelForm = async (event) => {
     event.preventDefault();
     const date = event.target.date.value;
     const slot = event.target.slot.value;
-    const userName = event.target.name.value;
+    const patient = event.target.name.value;
     const email = event.target.email.value;
     const address = event.target.address.value;
-    console.log({ date, userName, email, slot, address, _id, name });
+    const treatment = name;
+    const booking = { date, patient, email, slot, address, _id, treatment };
+    // api call
+    await axios.post("http://localhost:5000/booking", booking).then((res) => {
+      if (res?.data?.success) {
+        toast.success(`Appointment Successful ${date} At ${slot}`);
+      } else {
+        toast.warning(`Already have an appointment on ${date} At ${slot}`);
+      }
+    });
+
     setTreatment(null);
   };
   return (
