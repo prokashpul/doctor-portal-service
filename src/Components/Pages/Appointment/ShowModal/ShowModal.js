@@ -1,11 +1,10 @@
-import { async } from "@firebase/util";
 import axios from "axios";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
 import auth from "../../../../Firebase.init";
 
-const ShowModal = ({ treatment, date, setTreatment }) => {
+const ShowModal = ({ treatment, date, setTreatment, refetch }) => {
   const { name, slots, _id } = treatment || {};
   const [user] = useAuthState(auth);
   const handelForm = async (event) => {
@@ -25,7 +24,7 @@ const ShowModal = ({ treatment, date, setTreatment }) => {
         toast.warning(`Already have an appointment on ${date} At ${slot}`);
       }
     });
-
+    refetch();
     setTreatment(null);
   };
   return (

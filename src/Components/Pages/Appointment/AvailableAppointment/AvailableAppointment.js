@@ -1,21 +1,29 @@
 import axios from "axios";
 import { format } from "date-fns";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useQuery } from "react-query";
+import Spinner from "../../../Sheared/Spinner/Spinner";
 import ShowModal from "../ShowModal/ShowModal";
 import Info from "./Info";
 
 const AvailableAppointment = ({ date }) => {
-  const [services, setServices] = useState([]);
+  // const [services, setServices] = useState([]);
   const [treatment, setTreatment] = useState();
-  useEffect(() => {
-    const loadData = async () => {
-      const { data } = await axios(
-        `http://localhost:5000/available?date=${format(date, "PP")}`
-      );
-      setServices(data);
-    };
-    loadData();
-  }, []);
+  const formateDate = format(date, "PP");
+
+  const {
+    isLoading,
+    error,
+    refetch,
+    data: services,
+  } = useQuery(["available", formateDate], () =>
+    fetch(`http://localhost:5000/available?date=${formateDate}`).then((res) =>
+      res.json()
+    )
+  );
+  if (isLoading) {
+    return <Spinner></Spinner>;
+  }
   return (
     <div className="my-10">
       <h3 className="text-center text-lg text-secondary font-semibold my-10">
@@ -33,8 +41,9 @@ const AvailableAppointment = ({ date }) => {
       {treatment && (
         <ShowModal
           treatment={treatment}
-          date={format(date, "PP")}
+          date={formateDate}
           setTreatment={setTreatment}
+          refetch={refetch}
         ></ShowModal>
       )}
     </div>
