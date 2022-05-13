@@ -9,7 +9,9 @@ const AvailableAppointment = ({ date }) => {
   const [treatment, setTreatment] = useState();
   useEffect(() => {
     const loadData = async () => {
-      const { data } = await axios("http://localhost:5000/services");
+      const { data } = await axios(
+        `http://localhost:5000/available?date=${format(date, "PP")}`
+      );
       setServices(data);
     };
     loadData();
