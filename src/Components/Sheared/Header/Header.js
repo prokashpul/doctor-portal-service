@@ -73,7 +73,7 @@ const Header = () => {
         <div className="navbar-end flex  lg:hidden">
           {user ? (
             <label
-              for="dashbord-sidebar"
+              for="dashboard-sidebar"
               className="btn btn-primary drawer-button text-neutral"
             >
               Dashboard
