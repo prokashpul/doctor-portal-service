@@ -31,7 +31,7 @@ const AvailableAppointment = ({ date }) => {
       {treatment && (
         <ShowModal
           treatment={treatment}
-          date={date}
+          date={format(date, "PP")}
           setTreatment={setTreatment}
         ></ShowModal>
       )}

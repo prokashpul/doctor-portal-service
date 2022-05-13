@@ -1,4 +1,3 @@
-import { format } from "date-fns";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../../Firebase.init";
@@ -13,7 +12,6 @@ const ShowModal = ({ treatment, date, setTreatment }) => {
     const userName = event.target.name.value;
     const email = event.target.email.value;
     const address = event.target.address.value;
-
     console.log({ date, userName, email, slot, address, _id, name });
     setTreatment(null);
   };
@@ -35,8 +33,7 @@ const ShowModal = ({ treatment, date, setTreatment }) => {
             <input
               type="text"
               name="date"
-              defaultValue={format(date, "PP")}
-              disabled
+              defaultValue={date}
               className="input input-bordered w-full "
             />
             <select name="slot" className="select select-bordered w-full">
@@ -52,6 +49,7 @@ const ShowModal = ({ treatment, date, setTreatment }) => {
               name="name"
               defaultValue={user?.displayName || ""}
               className="input input-bordered w-full "
+              disabled
             />
             <input
               type="email"
@@ -59,6 +57,7 @@ const ShowModal = ({ treatment, date, setTreatment }) => {
               placeholder="email"
               defaultValue={user?.email || ""}
               className="input input-bordered w-full "
+              disabled
             />
             <input
               type="text"

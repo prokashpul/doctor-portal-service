@@ -6,6 +6,8 @@ import Register from "./Components/Pages/Register/Register";
 import Footer from "./Components/Sheared/Footer/Footer";
 import Header from "./Components/Sheared/Header/Header";
 import RequireAuth from "./Components/Utilities/RequireAuth/RequireAuth";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -25,6 +27,7 @@ function App() {
         <Route path="/register" element={<Register />} />
       </Routes>
       <Footer></Footer>
+      <ToastContainer></ToastContainer>
     </div>
   );
 }

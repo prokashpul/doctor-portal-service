@@ -1,25 +1,25 @@
 import { signOut } from "firebase/auth";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import auth from "../../../Firebase.init";
 
 const navMenu = (
   <>
     <li>
-      <Link to="/">Home</Link>
+      <NavLink to="/">Home</NavLink>
     </li>
     <li>
-      <Link to="/">About</Link>
+      <NavLink to="/">About</NavLink>
     </li>
     <li>
-      <Link to="/appointment">Appointment</Link>
+      <NavLink to="/appointment">Appointment</NavLink>
     </li>
     <li>
-      <Link to="/">Reviews</Link>
+      <NavLink to="/">Reviews</NavLink>
     </li>
     <li>
-      <Link to="/">Contact Us</Link>
+      <NavLink to="/">Contact Us</NavLink>
     </li>
   </>
 );
@@ -34,6 +34,9 @@ const Header = () => {
   return (
     <header className="navbar bg-base-100 z-50">
       <div className="w-full">
+        <NavLink to="/" className="btn btn-ghost normal-case text-xl">
+          Doctor Portal
+        </NavLink>
         <div className="dropdown">
           <label tabIndex="0" className="btn btn-ghost lg:hidden">
             <svg
@@ -53,21 +56,18 @@ const Header = () => {
           </label>
           <ul
             tabIndex="0"
-            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-compact dropdown-content  mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             {navMenu}
           </ul>
         </div>
-        <Link to="/" className="btn btn-ghost normal-case text-xl">
-          Doctor Portal
-        </Link>
       </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal p-0">
+      <div className="navbar-center hidden  lg:flex">
+        <ul className="menu menu-horizontal gap-3 p-0">
           {navMenu}
           {!user ? (
             <li>
-              <Link to="/login">Login</Link>
+              <NavLink to="/login">Login</NavLink>
             </li>
           ) : (
             <button onClick={logout} className="btn btn-ghost">
