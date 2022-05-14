@@ -25,7 +25,7 @@ const navMenu = (
 );
 
 const Header = () => {
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
   const navigate = useNavigate();
   const logout = () => {
     signOut(auth);

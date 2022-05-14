@@ -1,4 +1,5 @@
 import React from "react";
+
 import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
@@ -9,7 +10,7 @@ const Dashboard = () => {
         type="checkbox"
         className="drawer-toggle"
       />
-      <div className="drawer-content flex flex-col items-center justify-center">
+      <div className="drawer-content flex flex-col m-5 ">
         <Outlet></Outlet>
       </div>
       <div className="drawer-side bg-slate-100 rel">
@@ -19,7 +20,7 @@ const Dashboard = () => {
             <NavLink to="/dashboard/appointments">My Appointments</NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/booking">Booking</NavLink>
+            <NavLink to="/dashboard/booking">Booking </NavLink>
           </li>
         </ul>
       </div>
