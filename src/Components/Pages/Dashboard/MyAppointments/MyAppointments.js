@@ -45,6 +45,7 @@ const MyAppointments = () => {
         <table className="table w-full">
           <thead className="bg-primary">
             <tr>
+              <th>SL.No</th>
               <th>Name</th>
               <th>Date</th>
               <th>Time</th>
