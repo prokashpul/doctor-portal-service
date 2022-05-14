@@ -15,7 +15,7 @@ const Dashboard = () => {
       </div>
       <div className="drawer-side bg-slate-100 rel">
         <label for="dashboard-sidebar" className="drawer-overlay "></label>
-        <ul className="menu p-4 overflow-y-auto w-80 text-base-content sticky  top-0">
+        <ul className="menu p-4 overflow-y-auto w-52 text-base-content sticky  top-0">
           <li>
             <NavLink to="/dashboard/appointments">My Appointments</NavLink>
           </li>
