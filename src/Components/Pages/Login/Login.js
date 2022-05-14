@@ -6,6 +6,7 @@ import {
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../Firebase.init";
+import useToken from "../../../Hooks/useToken/useToken";
 import Spinner from "../../Sheared/Spinner/Spinner";
 
 const Login = () => {
@@ -13,19 +14,19 @@ const Login = () => {
   const [signInWithEmailAndPassword, eUser, eLoading, eError] =
     useSignInWithEmailAndPassword(auth);
   const navigate = useNavigate();
+  const [token] = useToken(user || eUser);
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   useEffect(() => {
-    if (user || eUser) {
+    if (token) {
       navigate(from, { replace: true });
     }
-  }, [navigate, user, eUser, from]);
+  }, [token, from, navigate]);
 
   const onSubmit = (data) => {
     signInWithEmailAndPassword(data.email, data.password);
@@ -48,7 +49,7 @@ const Login = () => {
             Log in
           </h2>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <label className="label" htmlhtmlFor="email">
+            <label className="label" htmlFor="email">
               <span className="label-text">Email</span>
             </label>
             {errors.email?.type === "pattern" && (
@@ -71,7 +72,7 @@ const Login = () => {
                 },
               })}
             />
-            <label className="label" htmlhtmlFor="password">
+            <label className="label" htmlFor="password">
               <span className="label-text">Password</span>
             </label>
             {errors.password?.type === "pattern" && (

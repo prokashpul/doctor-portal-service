@@ -18,7 +18,7 @@ const Register = () => {
   const {
     register,
     handleSubmit,
-    watch,
+
     formState: { errors },
   } = useForm();
   const location = useLocation();
@@ -42,9 +42,8 @@ const Register = () => {
     await updateProfile({ displayName: data.name });
   };
 
-  if (user || eUser) {
-    // console.log(user || eUser);
-    // navigate(from, { replace: true });
+  if (token) {
+    navigate(from, { replace: true });
   }
   return (
     <div className="flex justify-center items-center w-[100%] min-h-[87vh] my-20">
@@ -54,7 +53,7 @@ const Register = () => {
             Sin Up
           </h2>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <label className="label" htmlhtmlFor="name">
+            <label className="label" htmlFor="name">
               <span className="label-text">Name</span>
             </label>
 
@@ -70,7 +69,7 @@ const Register = () => {
                 required: { value: true, message: "Name field is required" },
               })}
             />
-            <label className="label" htmlhtmlFor="email">
+            <label className="label" htmlFor="email">
               <span className="label-text">Email</span>
             </label>
             {errors.email?.type === "pattern" && (
@@ -94,7 +93,7 @@ const Register = () => {
               })}
             />
 
-            <label className="label" htmlhtmlFor="password">
+            <label className="label" htmlFor="password">
               <span className="label-text">Password</span>
             </label>
             {errors.password?.type === "pattern" && (

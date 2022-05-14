@@ -29,6 +29,7 @@ const Header = () => {
   const navigate = useNavigate();
   const logout = () => {
     signOut(auth);
+    localStorage.removeItem("token");
     navigate("/login");
   };
   return (
@@ -74,7 +75,7 @@ const Header = () => {
           {user ? (
             <div className="drawer-content ">
               <label
-                for="my-drawer-2"
+                htmlFor="my-drawer-2"
                 className="btn btn-primary drawer-button lg:hidden"
               >
                 Dashboard

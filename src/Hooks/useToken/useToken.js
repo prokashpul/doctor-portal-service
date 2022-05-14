@@ -9,7 +9,11 @@ const useToken = (user) => {
     if (email) {
       axios
         .put(`http://localhost:5000/user/${email}`, currentUser)
-        .then((res) => console.log(res));
+        .then((res) => {
+          const token = res?.data?.accessToken;
+          localStorage.setItem("token", token);
+          setToken(token);
+        });
     }
   }, [user]);
   return [token];
