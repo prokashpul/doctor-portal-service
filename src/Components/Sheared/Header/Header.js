@@ -72,12 +72,14 @@ const Header = () => {
 
         <div className="navbar-end flex  lg:hidden">
           {user ? (
-            <label
-              for="dashboard-sidebar"
-              className="btn btn-primary drawer-button text-neutral"
-            >
-              Dashboard
-            </label>
+            <div className="drawer-content ">
+              <label
+                for="my-drawer-2"
+                className="btn btn-primary drawer-button lg:hidden"
+              >
+                Dashboard
+              </label>
+            </div>
           ) : (
             <button className="btn btn-primary">
               <NavLink to="/login">Login</NavLink>

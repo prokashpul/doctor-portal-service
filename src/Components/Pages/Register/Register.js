@@ -7,6 +7,7 @@ import {
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../Firebase.init";
+import useToken from "../../../Hooks/useToken/useToken";
 import Spinner from "../../Sheared/Spinner/Spinner";
 
 const Register = () => {
@@ -23,6 +24,8 @@ const Register = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   const navigate = useNavigate();
+  const [token] = useToken(user || eUser);
+
   if (loading || updating || eLoading) {
     return <Spinner></Spinner>;
   }
@@ -40,8 +43,8 @@ const Register = () => {
   };
 
   if (user || eUser) {
-    console.log(user || eUser);
-    navigate(from, { replace: true });
+    // console.log(user || eUser);
+    // navigate(from, { replace: true });
   }
   return (
     <div className="flex justify-center items-center w-[100%] min-h-[87vh] my-20">

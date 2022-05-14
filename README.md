@@ -13,3 +13,4 @@
 > - npm install react-hook-form
 > - npm install --save react-toastify
 > - npm i react-query
+> - npm install jsonwebtoken
