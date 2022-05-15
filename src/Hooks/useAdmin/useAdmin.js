@@ -5,6 +5,7 @@ import auth from "../../Firebase.init";
 const useAdmin = () => {
   const [user] = useAuthState(auth);
   const [admin, setAdmin] = useState(false);
+  const [adminLoading, setAdminLoading] = useState(true);
   useEffect(() => {
     const email = user?.email;
 
@@ -20,9 +21,10 @@ const useAdmin = () => {
         })
         .then((data) => {
           setAdmin(data.admin);
+          setAdminLoading(false);
         });
   });
-  return [admin];
+  return [admin, adminLoading];
 };
 
 export default useAdmin;

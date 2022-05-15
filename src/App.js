@@ -12,6 +12,7 @@ import Dashboard from "./Components/Pages/Dashboard/Dashboard";
 import Booking from "./Components/Pages/Dashboard/Booking/Booking";
 import MyAppointments from "./Components/Pages/Dashboard/MyAppointments/MyAppointments";
 import Users from "./Components/Pages/Dashboard/User/Users";
+import RequireAdmin from "./Components/Utilities/RequireAdmin/RequireAdmin";
 
 function App() {
   return (
@@ -44,7 +45,14 @@ function App() {
             path="/dashboard/booking"
             element={<Booking></Booking>}
           ></Route>
-          <Route path="/dashboard/users" element={<Users></Users>}></Route>
+          <Route
+            path="/dashboard/users"
+            element={
+              <RequireAdmin>
+                <Users></Users>
+              </RequireAdmin>
+            }
+          ></Route>
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
