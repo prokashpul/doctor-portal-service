@@ -1,8 +1,10 @@
 import React from "react";
 
 import { NavLink, Outlet } from "react-router-dom";
+import useAdmin from "../../../Hooks/useAdmin/useAdmin";
 
 const Dashboard = () => {
+  const [admin] = useAdmin();
   return (
     <div className="drawer drawer-mobile">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -18,9 +20,11 @@ const Dashboard = () => {
           <li>
             <NavLink to="/dashboard/booking">Booking </NavLink>
           </li>
-          <li>
-            <NavLink to="/dashboard/users">All users </NavLink>
-          </li>
+          {admin && (
+            <li>
+              <NavLink to="/dashboard/users">All users </NavLink>
+            </li>
+          )}
         </ul>
       </div>
     </div>

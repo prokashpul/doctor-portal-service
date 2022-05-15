@@ -27,6 +27,7 @@ const navMenu = (
 const Header = () => {
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
+
   const logout = () => {
     signOut(auth);
     localStorage.removeItem("token");

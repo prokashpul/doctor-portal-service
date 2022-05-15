@@ -40,9 +40,16 @@ const Users = () => {
         authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status === 403) {
+          toast.warning("You not accessed ");
+        }
+        return res.json();
+      })
       .then((data) => {
-        toast.success("Add Admin Successful");
+        if (data.modifiedCount > 0) {
+          toast.success("Add Admin Successful");
+        }
         refetch();
       });
   };
