@@ -15,12 +15,15 @@ const MyAppointments = () => {
     if (user) {
       setLoading(true);
       const run = async () => {
-        fetch(`http://localhost:5000/booking/?email=${user?.email}`, {
-          method: "GET",
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
+        fetch(
+          `https://warm-anchorage-40266.herokuapp.com/booking/?email=${user?.email}`,
+          {
+            method: "GET",
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        )
           .then((res) => {
             if (res.status === 401 || res.status === 403) {
               signOut(auth);
