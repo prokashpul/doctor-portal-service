@@ -1,8 +1,25 @@
 import React from "react";
+import { toast } from "react-toastify";
 
 const TableData = ({ doctor, index, refetch }) => {
-  const { name, email, img, specialist } = doctor || {};
-  console.log(doctor);
+  const { name, email, img, specialist, _id } = doctor || {};
+  const deleteHandel = (id) => {
+    fetch(`http://localhost:5000/doctors/${id}`, {
+      method: "DELETE",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.deletedCount) {
+          toast.success("successfully delete  ");
+          refetch();
+        }
+      });
+  };
+
   return (
     <tr>
       <th>{index}</th>
@@ -19,7 +36,10 @@ const TableData = ({ doctor, index, refetch }) => {
       <td>{specialist}</td>
 
       <td>
-        <button className="btn btn-circle bg-red-600 text-white hover:text-red-600">
+        <button
+          onClick={() => deleteHandel(_id)}
+          className="btn btn-circle bg-red-600 text-white hover:text-red-600"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-8 w-8"
