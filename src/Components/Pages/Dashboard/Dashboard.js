@@ -28,6 +28,9 @@ const Dashboard = () => {
               <li>
                 <NavLink to="/dashboard/addDoctor">Add New Doctor </NavLink>
               </li>
+              <li>
+                <NavLink to="/dashboard/manage-doctor">Manage Doctors </NavLink>
+              </li>
             </>
           )}
         </ul>
