@@ -26,6 +26,7 @@ const ShowModal = ({ treatment, date, setTreatment, refetch }) => {
     });
     refetch();
     setTreatment(null);
+    console.log(booking);
   };
   return (
     <>

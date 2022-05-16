@@ -21,9 +21,14 @@ const Dashboard = () => {
             <NavLink to="/dashboard/booking">Booking </NavLink>
           </li>
           {admin && (
-            <li>
-              <NavLink to="/dashboard/users">All users </NavLink>
-            </li>
+            <>
+              <li>
+                <NavLink to="/dashboard/users">All users </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/addDoctor">Add New Doctor </NavLink>
+              </li>
+            </>
           )}
         </ul>
       </div>
