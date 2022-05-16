@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
+import { toast } from "react-toastify";
 import Spinner from "../../../Sheared/Spinner/Spinner";
 
 const AddDoctor = () => {
@@ -8,14 +9,54 @@ const AddDoctor = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
   const { data: service, isLoading } = useQuery("service", () =>
     fetch("http://localhost:5000/services").then((res) => res.json())
   );
+  const imgKey = "22ee42828b610caaaea90dab1d521f91";
   if (isLoading) {
     return <Spinner></Spinner>;
   }
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    const image = data.image[0];
+    const formData = new FormData();
+    formData.append("image", image);
+    const url = `https://api.imgbb.com/1/upload?key=${imgKey}`;
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        if (result.success) {
+          const doctor = {
+            name: data.name,
+            email: data.email,
+            specialist: data.specialist,
+            img: result.data.display_url,
+          };
+          fetch("http://localhost:5000/doctors", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+            body: JSON.stringify(doctor),
+          })
+            .then((res) => res.json())
+            .then((doctorData) => {
+              if (doctorData.insertedId) {
+                toast("Doctor added successfully");
+                reset();
+              } else {
+                toast("Doctor is not add");
+              }
+            });
+        }
+      });
+  };
 
   return (
     <div className="max-w-[500px] mx-auto shadow-2xl rounded-lg my-10  min-h-[85vh]">
@@ -68,7 +109,7 @@ const AddDoctor = () => {
           </label>
           <select
             {...register("specialist")}
-            class="select select-bordered w-full "
+            className="select select-bordered w-full "
           >
             {service?.map((s) => (
               <option key={s?._id}>{s.name}</option>
