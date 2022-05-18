@@ -14,3 +14,4 @@
 > - npm install --save react-toastify
 > - npm i react-query
 > - npm install jsonwebtoken
+> - npm install --save @stripe/react-stripe-js @stripe/stripe-js
