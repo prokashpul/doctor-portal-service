@@ -1,7 +1,7 @@
 import { signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import auth from "../../../../Firebase.init";
 import Spinner from "../../../Sheared/Spinner/Spinner";
@@ -53,16 +53,26 @@ const MyAppointments = () => {
               <th>Date</th>
               <th>Time</th>
               <th>Treatment</th>
+              <th>Payment</th>
             </tr>
           </thead>
           <tbody>
             {booking?.map((booked, index) => (
               <tr key={booked._id}>
                 <th>{index + 1}</th>
-                <td>{booked.patient}</td>
+                <td>{booked.patientName}</td>
                 <td>{booked.date}</td>
                 <td>{booked.slot}</td>
                 <td>{booked.treatment}</td>
+                <td>
+                  {booked.fees && (
+                    <Link to={`/dashboard/payment/${booked._id}`}>
+                      <button className="btn btn-xs bg-red-500 text-white">
+                        Pay
+                      </button>
+                    </Link>
+                  )}
+                </td>
               </tr>
             ))}
           </tbody>

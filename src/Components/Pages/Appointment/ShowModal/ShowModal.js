@@ -5,30 +5,40 @@ import { toast } from "react-toastify";
 import auth from "../../../../Firebase.init";
 
 const ShowModal = ({ treatment, date, setTreatment, refetch }) => {
-  const { name, slots, _id } = treatment || {};
+  const { name, slots, price, _id } = treatment || {};
   const [user] = useAuthState(auth);
   const handelForm = async (event) => {
     event.preventDefault();
-    const date = event.target.date.value;
+
     const slot = event.target.slot.value;
-    const patient = event.target.name.value;
-    const email = event.target.email.value;
-    const address = event.target.address.value;
-    const treatment = name;
-    const booking = { date, patient, email, slot, address, _id, treatment };
+    const booking = {
+      treatmentId: _id,
+      fees: price,
+      treatment: name,
+      slot,
+      email: user.email,
+      patientName: user.displayName,
+      address: event.target.address.value,
+      phone: event.target.phoneNumber.value,
+      date: date,
+    };
+
     // api call
-    await axios
-      .post("https://warm-anchorage-40266.herokuapp.com/booking", booking)
-      .then((res) => {
-        if (res?.data?.success) {
-          toast.success(`Appointment Successful ${date} At ${slot}`);
-        } else {
-          toast.warning(`Already have an appointment on ${date} At ${slot}`);
-        }
-      });
-    refetch();
-    setTreatment(null);
-    console.log(booking);
+
+    try {
+      await axios
+        .post("https://warm-anchorage-40266.herokuapp.com/booking", booking)
+        .then((res) => {
+          if (res?.data?.success) {
+            toast.success(`Appointment Successful ${date} At ${slot}`);
+            refetch();
+          } else {
+            toast.warning(`Already have an appointment on ${date} At ${slot}`);
+          }
+        });
+    } catch {
+      return;
+    }
   };
   return (
     <>

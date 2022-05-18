@@ -1,7 +1,7 @@
-import axios from "axios";
 import { format } from "date-fns";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
+import { toast } from "react-toastify";
 import Spinner from "../../../Sheared/Spinner/Spinner";
 import ShowModal from "../ShowModal/ShowModal";
 import Info from "./Info";
@@ -23,6 +23,9 @@ const AvailableAppointment = ({ date }) => {
   );
   if (isLoading) {
     return <Spinner></Spinner>;
+  }
+  if (error) {
+    toast.warning("something wrang");
   }
   return (
     <div className="my-10">

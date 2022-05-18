@@ -74,7 +74,7 @@ const Users = () => {
                   {!user?.role ? (
                     <button
                       onClick={() => makeAdmin(user.email)}
-                      class="btn btn-sm btn-accent btn-outline "
+                      className="btn btn-sm btn-accent btn-outline "
                     >
                       Make admin
                     </button>
@@ -83,7 +83,7 @@ const Users = () => {
                   )}
                 </td>
                 <td>
-                  <button class="btn btn-sm btn-accent btn-outline ">
+                  <button className="btn btn-sm btn-accent btn-outline ">
                     Delete
                   </button>
                 </td>
