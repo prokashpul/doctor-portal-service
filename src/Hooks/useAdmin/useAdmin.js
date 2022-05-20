@@ -10,7 +10,7 @@ const useAdmin = () => {
     const email = user?.email;
 
     if (email)
-      fetch(`http://localhost:5000/admin/${email}`, {
+      fetch(`https://warm-anchorage-40266.herokuapp.com/admin/${email}`, {
         method: "GET",
         headers: {
           authorization: `Bearer ${localStorage.getItem("token")}`,

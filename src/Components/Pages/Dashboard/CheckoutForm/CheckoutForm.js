@@ -12,7 +12,7 @@ const CheckoutForm = ({ appointment }) => {
   const [clientSecret, setClientSecret] = useState("");
   const { price, email, patientName, _id } = appointment || {};
   useEffect(() => {
-    fetch(`http://localhost:5000/create-payment-intent`, {
+    fetch(`https://warm-anchorage-40266.herokuapp.com/create-payment-intent`, {
       method: "POST",
 
       headers: {
@@ -75,7 +75,7 @@ const CheckoutForm = ({ appointment }) => {
         appointment: _id,
         transactionId: paymentIntent.id,
       };
-      fetch(`http://localhost:5000/bookings/${_id}`, {
+      fetch(`https://warm-anchorage-40266.herokuapp.com/bookings/${_id}`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",

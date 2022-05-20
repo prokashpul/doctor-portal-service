@@ -12,7 +12,9 @@ const AddDoctor = () => {
     reset,
   } = useForm();
   const { data: service, isLoading } = useQuery("service", () =>
-    fetch("http://localhost:5000/services").then((res) => res.json())
+    fetch("https://warm-anchorage-40266.herokuapp.com/services").then((res) =>
+      res.json()
+    )
   );
   const imgKey = "22ee42828b610caaaea90dab1d521f91";
   if (isLoading) {
@@ -37,7 +39,7 @@ const AddDoctor = () => {
             specialist: data.specialist,
             img: result.data.display_url,
           };
-          fetch("http://localhost:5000/doctors", {
+          fetch("https://warm-anchorage-40266.herokuapp.com/doctors", {
             method: "POST",
             headers: {
               "content-type": "application/json",

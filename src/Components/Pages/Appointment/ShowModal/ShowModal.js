@@ -26,14 +26,16 @@ const ShowModal = ({ treatment, date, setTreatment, refetch }) => {
     // api call
 
     try {
-      await axios.post("http://localhost:5000/booking", booking).then((res) => {
-        if (res?.data?.success) {
-          toast.success(`Appointment Successful ${date} At ${slot}`);
-          refetch();
-        } else {
-          toast.warning(`Already have an appointment on ${date} At ${slot}`);
-        }
-      });
+      await axios
+        .post("https://warm-anchorage-40266.herokuapp.com/booking", booking)
+        .then((res) => {
+          if (res?.data?.success) {
+            toast.success(`Appointment Successful ${date} At ${slot}`);
+            refetch();
+          } else {
+            toast.warning(`Already have an appointment on ${date} At ${slot}`);
+          }
+        });
     } catch {
       return;
     }
