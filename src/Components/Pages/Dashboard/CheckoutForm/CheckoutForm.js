@@ -1,6 +1,5 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
-import Spinner from "../../../Sheared/Spinner/Spinner";
 
 const CheckoutForm = ({ appointment }) => {
   const stripe = useStripe();
@@ -86,6 +85,7 @@ const CheckoutForm = ({ appointment }) => {
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
+
           setSpinner(false);
         });
     }
@@ -130,7 +130,7 @@ const CheckoutForm = ({ appointment }) => {
         <button
           className="btn  btn-primary btn-sm my-5"
           type="submit"
-          disabled={!stripe || !clientSecret}
+          disabled={!stripe || !clientSecret || paySuccess}
         >
           Pay
         </button>
