@@ -1,7 +1,7 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import React, { useEffect, useState } from "react";
-
+import React from "react";
+import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import Spinner from "../../../Sheared/Spinner/Spinner";
 import CheckoutForm from "../CheckoutForm/CheckoutForm";
@@ -10,54 +10,49 @@ const stripePromise = loadStripe(
   "pk_test_51L0atQGsojxMCBEGOjCobionVxcEYXfQJLnIAaUfHzQv1n401xWh7dumcOJQHvyWlfE4miMU8JlfgHv3aOlrIbIS00QISYLmow"
 );
 const Payment = () => {
-  const [loading, setLoading] = useState(false);
-  const [appointment, setAppointment] = useState([]);
   const { id } = useParams();
-
-  useEffect(() => {
-    setLoading(true);
-    const url = `https://warm-anchorage-40266.herokuapp.com/bookings/${id}`;
+  const url = `http://localhost:5000/bookings/${id}`;
+  console.log(url);
+  const { data: appointment, isLoading } = useQuery(["booking", id], () =>
     fetch(url, {
-      "content-type": "application/json",
+      method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setAppointment(data);
-        setLoading(false);
-      });
-  }, [id]);
-  if (loading) {
+    }).then((res) => res.json())
+  );
+  const { treatment, price, patientName, slot, date, address } =
+    appointment || {};
+
+  if (isLoading) {
     return <Spinner></Spinner>;
   }
-  const { treatment, date, slot, email, patientName, address, phone, fees } =
-    appointment || {};
   return (
-    <>
-      <div className="card  md:m-10 bg-base-100 shadow-2xl">
-        <div className="card-body md:p-5">
-          <small className="text-primary">Patient : {patientName}</small>
-          <h2 className="card-title text-center text-secondary">
-            Your Appointment for :{treatment}
-          </h2>
+    <div className="mx-auto">
+      <div class="card w-50 max-w-md bg-base-100 shadow-xl my-12">
+        <div class="card-body">
           <p>
-            Appointment date: {date} Appointment time:{slot}
+            <small className="text-secondary">Hello!, {patientName}</small>
           </p>
-          <p className="text-xl">Please Pay : ${fees}</p>
-          <p>Address: {address}</p>
-          <p>Phone: {phone} </p> <p>Email :{email}</p>
+          <h2 class="card-title text-primary">Please pay for: {treatment}</h2>
+          <p>
+            Your Appointment: <span className="text-orange-700">{slot}</span> at{" "}
+            {date}
+          </p>
+          <p className="font-bold">
+            Please pay:
+            <span className="text-primary ml-">${price}</span>{" "}
+          </p>
         </div>
       </div>
-      <div className="card  md:m-10 bg-base-100 shadow-2xl">
-        <div className="card-body md:p-5">
+      <div class="card flex-shrink-0 w-50 max-w-md shadow-2xl bg-base-100">
+        <div class="card-body">
           <Elements stripe={stripePromise}>
-            <CheckoutForm />
+            <CheckoutForm appointment={appointment} />
           </Elements>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

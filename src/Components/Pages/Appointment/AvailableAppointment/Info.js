@@ -13,7 +13,7 @@ const Info = ({ service, setTreatment }) => {
           {slots?.length}
           {slots?.length ? " SPACES AVAILABLE" : " No SPACES AVAILABLE"}
         </p>
-        <p className={`uppercase`}>Fees: ${price}</p>
+        <p className={`uppercase`}>price: ${price}</p>
         <div className="card-actions border border-primary rounded-lg justify-end">
           <label
             htmlFor="treatment-modal"

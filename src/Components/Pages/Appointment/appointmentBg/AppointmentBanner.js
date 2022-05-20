@@ -19,7 +19,7 @@ const AppointmentBanner = ({ date, setDate }) => {
           <img src={chair} alt="Album" className="w-full md:w-[590px]" />
         </figure>
         <div className="w-full md:w-[590px]">
-          <DayPicker mode="single" selected={date} onSelect={setDate} />
+          <DayPicker mode="single" selected={date} onDayClick={setDate} />
         </div>
       </div>
     </section>

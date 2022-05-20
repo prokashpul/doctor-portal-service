@@ -1,38 +1,79 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import React, { useState } from "react";
-import { toast } from "react-toastify";
+import React, { useEffect, useState } from "react";
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ appointment }) => {
   const stripe = useStripe();
   const elements = useElements();
-  const [carError, setError] = useState("");
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const [cardError, setCardError] = useState("");
+  const [clientSecret, setClientSecret] = useState("");
+  const { price } = appointment || {};
+  useEffect(() => {
+    fetch(`http://localhost:5000/create-payment-intent`, {
+      method: "post",
+      "content-type": "application/json",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({ price }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.clientSecret) {
+          setClientSecret(data.clientSecret);
+        }
+      });
+  }, [price]);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!stripe || !elements) {
+      return;
+    }
+    // Get a reference to a mounted CardElement. Elements knows how
+    // to find your CardElement because there can only ever be one of
+    // each type of element.
+    const card = elements.getElement(CardElement);
 
-    if (!elements || !stripe) {
+    if (card == null) {
       return;
     }
 
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+    const { error } = await stripe.createPaymentMethod({
       type: "card",
-      card: elements.getElement(CardElement),
+      card,
     });
-    setError(error?.message || "");
-    toast(carError);
+
+    if (error) {
+      setCardError(error.message);
+    } else {
+      setCardError("");
+    }
   };
   return (
     <>
-      <>
-        {carError && <p className="text-red-500 mx-auto my-5"> {carError}</p>}
-      </>
-      <form className="md:p-10" onSubmit={handleSubmit}>
-        <CardElement />
+      {cardError && <p className="text-red-500 my-3">{cardError}</p>}
+      <form onSubmit={handleSubmit}>
+        <CardElement
+          options={{
+            style: {
+              base: {
+                fontSize: "16px",
+                color: "#424770",
+                "::placeholder": {
+                  color: "#aab7c4",
+                },
+              },
+              invalid: {
+                color: "#9e2146",
+              },
+            },
+          }}
+        />
         <button
-          className="btn btn-sm text-white btn-primary my-5"
+          className="btn  btn-primary btn-sm my-5"
           type="submit"
-          disabled={!stripe || !elements}
+          disabled={!stripe || !clientSecret}
         >
-          Pay now
+          Pay
         </button>
       </form>
     </>

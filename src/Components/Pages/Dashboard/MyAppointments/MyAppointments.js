@@ -15,15 +15,12 @@ const MyAppointments = () => {
     if (user) {
       setLoading(true);
       const run = async () => {
-        fetch(
-          `https://warm-anchorage-40266.herokuapp.com/booking/?email=${user?.email}`,
-          {
-            method: "GET",
-            headers: {
-              authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        )
+        fetch(`http://localhost:5000/booking/?email=${user?.email}`, {
+          method: "GET",
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
           .then((res) => {
             if (res.status === 401 || res.status === 403) {
               signOut(auth);
@@ -65,12 +62,17 @@ const MyAppointments = () => {
                 <td>{booked.slot}</td>
                 <td>{booked.treatment}</td>
                 <td>
-                  {booked.fees && (
+                  {booked.price && !booked.paid && (
                     <Link to={`/dashboard/payment/${booked._id}`}>
                       <button className="btn btn-xs bg-red-500 text-white">
                         Pay
                       </button>
                     </Link>
+                  )}
+                  {booked.price && booked.paid && (
+                    <span className="btn btn-xs bg-red-500 text-white">
+                      Paid
+                    </span>
                   )}
                 </td>
               </tr>

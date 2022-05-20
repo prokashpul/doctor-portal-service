@@ -17,9 +17,9 @@ const AvailableAppointment = ({ date }) => {
     refetch,
     data: services,
   } = useQuery(["available", formateDate], () =>
-    fetch(
-      `https://warm-anchorage-40266.herokuapp.com/available?date=${formateDate}`
-    ).then((res) => res.json())
+    fetch(`http://localhost:5000/available?date=${formateDate}`).then((res) =>
+      res.json()
+    )
   );
   if (isLoading) {
     return <Spinner></Spinner>;
