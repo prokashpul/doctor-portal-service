@@ -21,8 +21,7 @@ const Payment = () => {
       },
     }).then((res) => res.json())
   );
-  const { treatment, price, patientName, slot, date, address } =
-    appointment || {};
+  const { treatment, price, patientName, slot, date } = appointment || {};
 
   if (isLoading) {
     return <Spinner></Spinner>;
